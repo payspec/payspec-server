@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Payspec Platform</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+
+    <%  javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'index' %>
+
+    <%= favicon_link_tag 'favicon.png', type: 'image/png' %>
+
+
+  </head>
+
+  <body>
+      <% render  'shared/alert' %>
+
+    <%= yield %>
+
+      <%= render  'shared/footer' %>
+  </body>
+</html>

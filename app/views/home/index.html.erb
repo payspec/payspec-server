@@ -1,0 +1,311 @@
+<div class="hero-head" id="#home">
+
+  <section class="hero is-primary is-medium"  >
+<div class="hero-body">
+<div class="container">
+  <div class="header-titles">
+      <img src="<%= image_url 'senderclogo.png'%>"></img>
+      <!--
+    <h3 class="title is-3 is-spaced">Nametag Token</h3>
+    <h5 class="subtitle is-5 is-spaced">Your crypto handle.</h5>
+      -->
+  </div>
+
+
+  <div class="row">
+    <div class="is-size-4 font-raleway" style="margin-left:2em;"> SendERC - Token Payments </div>
+  </div>
+
+  <div class="header-buttons pull-right">
+
+    <span class="control ">
+      <a class="button is-info is-size-5" target="_blank" href="https://github.com/payspec">
+        <span class="icon">
+          <i class="fab fa-github"></i>
+        </span>
+        <span>Github</span>
+      </a>
+    </span>
+
+    <span class="control ">
+      <a class="button is-info is-size-5" target="_blank" href="https://github.com/payspec">
+        <span class="icon">
+          <i class="fab fa-ethereum"></i>
+        </span>
+        <span>PaySpec API</span>
+      </a>
+    </span>
+
+
+
+  </div>
+</div>
+</div>
+  </section>
+</div>
+<!-- end of header -->
+
+<!-- example content block -->
+<div class="content-block">
+  <section class="hero">
+<div class="hero-body">
+<div class="container">
+
+
+  <div id="eth-container" class="eth-container box" v-cloak    >
+
+
+
+
+    <div class="columns">
+
+      <div class="column" v-if="connected">
+        <div class="is-centered" >
+          <span class="tag is-size-6"> Connected: <i class="fab fa-ethereum has-text-success is-size-5" style="margin-left:1em;margin-right:0.5em"></i>  {{networkMode}}  </span>
+
+        </div>
+      </div>
+
+           <div class="column">
+
+             <div v-if="!connected" >
+               <div class="button is-secondary btn-action-connect-web3"> Connect To Metamask </div>
+             </div>
+
+
+             <div v-if="paySpecAddress">
+
+               <span class="tag is-size-6">PaySpec Contract </span> <br> <a target='_blank' v-bind:href='paySpecEtherscanURL'>{{paySpecAddress}}</a>
+             </div>
+
+           </div>
+           <div class="column">
+
+             <div v-if="web3address">
+
+               <span class="tag is-size-6">Connected Account </span><br> <a target='_blank' v-bind:href='etherscanURL'>{{web3address}}</a>
+             </div>
+
+
+           </div>
+    </div>
+
+    <div class="columns alert-container notification is-danger" v-if="errorMessage" >
+
+         {{ errorMessage }}
+
+   </div>
+
+  </div>
+
+
+  <div class="columns">
+
+    <div class="content column is-6 is-offset-3">
+
+
+      <div id="create-invoice-input" class="main-text box" v-cloak    >
+
+
+      <div class="whitespace-md"></div>
+
+
+      <div class="columns">
+        <div class="column">
+           <h4 class=" is-size-4 is-4 is-spaced">Create an Invoice</h4>
+        </div>
+        <!-- <div class="column">
+          <div class="pull-right" v-if='showAvailability' v-cloak>
+            <span class="tag is-success" v-if='nametagAvailable'>Available</span>
+            <span class="tag is-danger" v-if='!nametagAvailable'>Not Available</span>
+          </div>
+        </div> -->
+      </div>
+
+
+      <div class="field">
+        <label class="label"> Recipient Address </label>
+        <div class="control">
+          <input class="input is-large   " type="text" placeholder=" "  v-on:change="inputChange" v-on:keyup="keyUp" v-model='recipientAddress'>
+        </div>
+       </div>
+
+      <div class="field">
+        <label class="label"> Token Address </label>
+        <div class="control">
+          <input class="input is-large   " type="text" placeholder=" "  v-on:change="inputChange" v-on:keyup="keyUp" v-model='tokenAddress'>
+        </div>
+       </div>
+
+
+       <div class="field">
+         <label class="label"> Tokens Amount Due </label>
+         <div class="control">
+           <input class="input is-large   " type="text" placeholder=" "  v-on:change="inputChange" v-on:keyup="keyUp" v-model='tokenAmount'>
+         </div>
+        </div>
+
+        <div class="field">
+          <label class="label"> Description Note </label>
+          <div class="control">
+            <input class="input is-large   " type="text" placeholder=" "  v-on:change="inputChange" v-on:keyup="keyUp" v-model='description'>
+          </div>
+         </div>
+
+         <div class="field">
+           <label class="label"> Reference Number </label>
+           <div class="control">
+             <input class="input is-large   " type="text" placeholder=" "  v-on:change="inputChange" v-on:keyup="keyUp" v-model='refNumber'>
+           </div>
+          </div>
+
+        <div class="pull-right">
+          <div  v-bind:disabled="!(web3connected)"   class="button is-large" v-on:click='onSubmitNewInvoice'>
+            <span class=" ">
+              <i class="fab fa-ethereum" style="margin-right:1em"></i>
+            </span>
+            <span> Submit </span>
+          </div>
+        </div>
+
+
+        <div class="field" v-if='predictedUUID'>
+          <label class="label"> Output: Invoice UUID </label>
+          <div class="control">
+            <span class="tag is-success" >{{predictedUUID}}</span>
+          </div>
+         </div>
+
+         <div class="field" v-if='predictedUUID'>
+           <label class="label">   </label>
+           <div class="control">
+            <a v-bind:href="predictedInvoiceURL"> View and Pay Invoice </a>
+           </div>
+          </div>
+
+
+        </div>
+
+    </div>
+
+
+
+  </div>
+
+
+
+<!--
+  <div class="columns">
+
+    <div class="content column is-6 is-offset-3">
+
+
+      <div id="pay-invoice-input" class="main-text box" v-cloak    >
+
+
+      <div class="whitespace-md"></div>
+
+
+      <div class="columns">
+        <div class="column">
+           <h4 class=" is-size-4 is-4 is-spaced">Pay Invoice</h4>
+        </div>
+
+      </div>
+
+
+      <div class="field">
+        <label class="label"> Invoice ID </label>
+        <div class="control">
+          <input class="input is-large   " type="text" placeholder=" "  v-on:change="inputChange" v-on:keyup="keyUp" v-model='invoiceUUID'>
+        </div>
+       </div>
+
+
+
+        <div class="pull-right">
+          <div  v-bind:disabled="!(web3connected)"   class="button is-large" v-on:click='onSubmitNewInvoice'>
+            <span class=" ">
+              <i class="fab fa-ethereum" style="margin-right:1em"></i>
+            </span>
+            <span> Submit </span>
+          </div>
+        </div>
+
+
+        </div>
+
+    </div>
+
+
+  </div>
+-->
+
+
+
+</div>
+</div>
+  </section>
+  <hr/>
+</div>
+<!-- end of example block -->
+
+<!-- example content block -->
+<div class="content-block">
+  <section class="hero">
+
+<div class="hero-body">
+
+
+<!--  <div class="container" style="height:200px;" >
+  <div class="content" id="personalnameslist" v-if="list.length > 0" v-cloak>
+    <h4 class="title is-4">My Nametags</h4>
+    <div class="recent-tags-list blue-links" >
+
+        <span class="tag is-size-4" v-for="item in list"> <a v-bind:href="item.tokenURL" target="_blank"> {{item.tokenName}} </a> </span>
+
+
+  </div>
+    <div class="columns is-multiline">
+    <div class="column is-6">
+
+    </div>
+    <div class="column is-6">
+
+    </div>
+    </div>
+  </div>
+</div>-->
+
+
+
+<!-- <div class="container" style="height:200px;" >
+  <div class="content" id="recentnameslist" v-if="list.length > 0" v-cloak>
+    <h4 class="title is-4">Recent Nametags</h4>
+    <div class="recent-tags-list blue-links" >
+
+        <span class="tag is-size-4" v-for="item in list"> <a v-bind:href="item.tokenURL" target="_blank"> {{item.tokenName}} </a> </span>
+
+
+  </div>
+    <div class="columns is-multiline">
+    <div class="column is-6">
+
+    </div>
+    <div class="column is-6">
+
+    </div>
+    </div>
+  </div>
+</div>-->
+
+
+
+
+
+
+</div><!-- hero body -->
+
+  </section>
+  <hr/>
+</div>
