@@ -9,14 +9,14 @@
   },
   "dependencies": {
     "@rails/webpacker": "4.2.2",
-    "jquery": "^3.3.1",
     "eth-url-parser": "^1.0.3",
+    "jquery": "^3.4.1",
     "qrcode": "^1.4.4",
-    "web3": "^0.14.0",
-    "web3-utils": "^1.0.0-beta.36",
     "vue": "^2.6.11",
     "vue-loader": "^15.8.3",
-    "vue-template-compiler": "^2.6.11"
+    "vue-template-compiler": "^2.6.11",
+    "web3": "^0.14.0",
+    "web3-utils": "^1.0.0-beta.36"
   },
   "devDependencies": {
     "@babel/cli": "^7.7.7",

@@ -1,6 +1,6 @@
 
-const $ = require('jquery');
-import Vue from 'vue';
+var $ = require("jquery");
+import Vue from 'vue/dist/vue.esm.js';
 
 var ethUrlParser = require('eth-url-parser')
 

@@ -1,9 +1,7 @@
 
 
 
-
-const $ = require('jquery');
-
+var $ = require("jquery");
 var web3utils = require('web3-utils')
 
 
@@ -22,7 +20,7 @@ var erc20TokenContract = require('../../assets/contracts/ERC20Interface.json')
 
 const ContractInterface = require('./contract-interface')
 
-import Vue from 'vue'
+import Vue from 'vue/dist/vue.esm.js';
 
 
 

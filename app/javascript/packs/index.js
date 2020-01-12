@@ -2,7 +2,7 @@
 
 var $ = require("jquery");
 
-import Vue from 'vue';
+import Vue from 'vue/dist/vue.esm.js';
 
 import AlertRenderer from './alert-renderer'
 
@@ -26,22 +26,22 @@ var invoiceRenderer;
 
 
 $(document).ready(function(){
-
     var urlstring = window.location.href ;
 
 
-    console.log('meep')
+          //why is this broken ?
 
 
           var url_parts = url.parse(urlstring, true);
           var query = url_parts.query;
 
-          console.log(query)
+          console.log('query', query)
 
 
 
       if($("#home").length > 0){
 
+          console.log('found home ' )
         homeRenderer = new HomeRenderer();
 
         genericDashboard.init(homeRenderer, query);

@@ -1,7 +1,6 @@
 
-const $ = require('jquery');
-import Vue from 'vue';
-
+var $ = require("jquery");
+import Vue from 'vue/dist/vue.esm.js';
 
 
 //const relayConfig = require('../../../relay.config').config
@@ -92,7 +91,7 @@ export default class HomeRenderer {
         })
 
 
-        payInvoiceInput = new Vue({
+        /*payInvoiceInput = new Vue({
             el: '#pay-invoice-input',
             data: {
                invoiceUUID: '',
@@ -117,7 +116,7 @@ export default class HomeRenderer {
                     self.payInvoice( this.invoiceUUID )
                   }
               }
-          })
+          })*/
 
 
 

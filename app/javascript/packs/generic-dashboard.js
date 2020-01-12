@@ -1,6 +1,6 @@
 
-const $ = require('jquery');
 
+var $ = require("jquery");
 import EthHelper from './eth-helper'
 
 
