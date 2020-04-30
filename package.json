@@ -10,7 +10,7 @@
   "dependencies": {
     "@rails/webpacker": "4.2.2",
     "eth-url-parser": "^1.0.3",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "qrcode": "^1.4.4",
     "vue": "^2.6.11",
     "vue-loader": "^15.8.3",
